@@ -36,7 +36,7 @@ Please install the required software in a location in your `$PATH`
 ## Automated Installation ## 
 ```sh
 1. Clone megmap git.
-      git clone https://github.com/AnupamGautam/megmap.git
+      git clone https://github.com/husonlab/megmap.git
 
 2. Move to the megmap directory.
       cd megmap`
