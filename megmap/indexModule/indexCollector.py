@@ -15,7 +15,11 @@ class IndexGeneratorClass:
     def distributor(self)->None:
         
         if self.TakeTool == 'diamond':
-            DiamondIndexGeneratorHandler=DiamondIndexGenerator(self.TakeDatabaseFastaFile, self.TakeOutputFileName, self.TakeToolPath, self.TakeThreads, self.TakeRAM)
+            DiamondIndexGeneratorHandler=DiamondIndexGenerator(self.TakeDatabaseFastaFile,
+                                                               self.TakeOutputFileName,
+                                                               self.TakeToolPath,
+                                                               self.TakeThreads,
+                                                               self.TakeRAM)
 
             if not self.TakeToolPath: ##check if self.TakeToolPath variable is empty
                 DiamondIndexGeneratorHandler.normalDIcommand()
@@ -29,7 +33,12 @@ class IndexGeneratorClass:
 
 def indexEntry(ReceiveDatabaseFastaFile: str ="", ReceiveOutput: str = "megmap", ReceiveTool: str ="", ReceiveToolPath: str="",ReceiveThreads: int="",ReceiveRAM: str = "") -> None:
 
-    IndexGeneratorClassHandler=IndexGeneratorClass(os.path.abspath(ReceiveDatabaseFastaFile), os.path.abspath(ReceiveOutput), ReceiveTool, ReceiveToolPath,ReceiveThreads,ReceiveRAM)
+    IndexGeneratorClassHandler=IndexGeneratorClass(os.path.abspath(ReceiveDatabaseFastaFile),
+                                                   os.path.abspath(ReceiveOutput),
+                                                   ReceiveTool,
+                                                   ReceiveToolPath,
+                                                   ReceiveThreads,
+                                                   ReceiveRAM)
     IndexGeneratorClassHandler.distributor()
 
 

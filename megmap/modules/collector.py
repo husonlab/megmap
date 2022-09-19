@@ -39,6 +39,17 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap", Receiv
     PathOfDir=DirectoryCaller.DicGenAndCheck()
     print(PathOfDir)
 
-    megmapProcessorClassHandler=megmapProcessorClass(os.path.abspath(ReceiveInputFile), PathOfDir, os.path.abspath(ReceiveDatabase), ReceiveTool, ReceiveToolPath, ReceiveAlignmentIdentity, ReceiveAlignmentCoverage, ReceiveEvalue, ReceivePrefix,ReceiveThreads,ReceiveRAM)
+    megmapProcessorClassHandler=megmapProcessorClass(os.path.abspath(ReceiveInputFile),
+                                                        PathOfDir, 
+                                                        os.path.abspath(ReceiveDatabase), 
+                                                        ReceiveTool, 
+                                                        ReceiveToolPath,
+                                                        ReceiveAlignmentIdentity,
+                                                        ReceiveAlignmentCoverage,
+                                                        ReceiveEvalue,
+                                                        ReceivePrefix,
+                                                        ReceiveThreads,
+                                                        ReceiveRAM)
+    
     ReceiveAlignmentFileNameAndPath=megmapProcessorClassHandler.Alignment()
     print(ReceiveAlignmentFileNameAndPath)
