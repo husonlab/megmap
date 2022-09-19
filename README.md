@@ -1,5 +1,9 @@
-# megmap
+# megmap 
 
+# Attention: This program is under heavy development, in particular: 
+* There will be many bugs (please let us know about any that you find).
+* There are several missing features that are still to be added (please let us know about things that you would like). 
+* File formats will change.
 Before opening a new issue here, please check the appropriate already exits issues and commenting on a thread there.
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
