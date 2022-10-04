@@ -1,8 +1,8 @@
 import pandas as pd 
 import numpy as np
 import os
-from megmap.modules.utility import OutputDirectoryGenerator,tarDir,gb_to_mb
-from megmap.modules.diamondAlignment import DiamondAlignment
+from megmap.modules.utils.utility import OutputDirectoryGenerator,tarDir,gb_to_mb
+from megmap.modules.alignment.diamondAlignment import DiamondAlignment
 from megmap.modules.HitToCount import FunctionalHitToCount
 
 class megmapProcessorClass:

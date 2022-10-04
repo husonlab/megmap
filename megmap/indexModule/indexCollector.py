@@ -1,6 +1,6 @@
 import os
-from megmap.indexModule.indexDiamond import DiamondIndexGenerator
-from megmap.indexModule.indexBlast import BlastIndexGenerator 
+from megmap.indexModule.indexType.indexDiamond import DiamondIndexGenerator
+from megmap.indexModule.indexType.indexBlast import BlastIndexGenerator 
 
 class IndexGeneratorClass:
 
