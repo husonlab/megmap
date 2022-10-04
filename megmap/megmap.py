@@ -51,6 +51,8 @@ def main():
     GeneralParameter = OptionGroup(parser, "General Parameter")
     GeneralParameter.add_option('--p',action="store",dest='prefix', default="prefix",
                        help='Enter prefix', metavar='prefix')
+    GeneralParameter.add_option('--readMode',action="store",dest='readMode', default="short",
+                       help='Enter short for short read file and long for long reads file  [Default: short]', metavar='readMode')
     GeneralParameter.add_option('--t',action="store",dest='threads', default=cpu_count(),
                        help='Enter number of threads', metavar='threads')
     GeneralParameter.add_option('--ram',action="store",dest='ram', default="4gb",
@@ -72,7 +74,12 @@ def main():
 
 
 
-    megmapEntry(ReceiveInputFile=options.inputFile, ReceiveOutput=options.output, ReceiveDatabase=options.database , ReceiveTool=options.tool, ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity, ReceiveAlignmentCoverage=options.alignmentcoverage,ReceiveEvalue=options.evalue, ReceivePrefix=options.prefix, ReceiveThreads=options.threads, ReceiveRAM=options.ram)
+    megmapEntry(ReceiveInputFile=options.inputFile, ReceiveOutput=options.output,
+                ReceiveDatabase=options.database, ReceiveTool=options.tool,
+                ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity,
+                ReceiveAlignmentCoverage=options.alignmentcoverage, ReceiveEvalue=options.evalue,
+                ReceivePrefix=options.prefix, ReceiveReadMode=options.readMode,
+                ReceiveThreads=options.threads, ReceiveRAM=options.ram)
 
 if __name__ == '__main__':
 	main()

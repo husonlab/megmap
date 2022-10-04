@@ -1,13 +1,14 @@
 import pandas as pd 
 import numpy as np
 import os
+from megmap.modules.utils.qc import ClassQC
 from megmap.modules.utils.utility import OutputDirectoryGenerator,tarDir,gb_to_mb
 from megmap.modules.alignment.diamondAlignment import DiamondAlignment
 from megmap.modules.HitToCount import FunctionalHitToCount
 
 class megmapProcessorClass:
 
-    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "", TakeDatabase: str = "", TakeTool: str ="", TakeToolPath: str ="", TakeIdentity: int="", TakeAlignmentCoverage: int="", TakeEvalue: str="", TakePrefix: str="", TakeThreads: int="", TakeRAM: str = "")->None:
+    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "", TakeDatabase: str = "", TakeTool: str ="", TakeToolPath: str ="", TakeIdentity: int="", TakeAlignmentCoverage: int="", TakeEvalue: str="", TakePrefix: str="", TakeReadMode: str="",  TakeThreads: int="", TakeRAM: str = "")->None:
 
         self.TakeInputFile = TakeInputFile
         self.TakePathOfDir = TakePathOfDir
@@ -18,6 +19,7 @@ class megmapProcessorClass:
         self.TakeAlignmentCoverage = TakeAlignmentCoverage
         self.TakeEvalue = TakeEvalue
         self.TakePrefix= TakePrefix
+        self.TakeReadMode= TakeReadMode
         self.TakeThreads= TakeThreads
         self.TakeRAM= TakeRAM
 
@@ -47,11 +49,16 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                 ReceiveDatabase: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
                 ReceiveAlignmentCoverage: int=70,ReceiveEvalue: str="",
-                ReceivePrefix: str="",ReceiveThreads: int="",ReceiveRAM: str = "") -> None:
+                ReceivePrefix: str="",ReceiveReadMode: str="", 
+                ReceiveThreads: int="",ReceiveRAM: str = "") -> None:
 
     DirectoryCaller=OutputDirectoryGenerator(os.path.abspath(ReceiveOutput),'megmap')
     PathOfDir=DirectoryCaller.DicGenAndCheck()
     print(PathOfDir)
+    LogFilePath=""
+    if ReceiveTool=='blast':
+
+        ClassQC(ReceiveInputFile,ReceiveReadMode,LogFilePath).__extensionType__()
 
     megmapProcessorClassHandler=megmapProcessorClass(os.path.abspath(ReceiveInputFile),
                                                         PathOfDir, 
