@@ -1,5 +1,6 @@
 import os
 from megmap.indexModule.indexDiamond import DiamondIndexGenerator
+from megmap.indexModule.indexBlast import BlastIndexGenerator 
 
 class IndexGeneratorClass:
 
@@ -25,6 +26,16 @@ class IndexGeneratorClass:
                 DiamondIndexGeneratorHandler.normalDIcommand()
             else:
                 DiamondIndexGeneratorHandler.WithPathDIcommand()
+
+        elif self.TakeTool == 'blast':
+            DiamondIndexGeneratorHandler=BlastIndexGenerator(self.TakeDatabaseFastaFile,
+                                                               self.TakeOutputFileName,
+                                                               self.TakeToolPath)
+
+            if not self.TakeToolPath: ##check if self.TakeToolPath variable is empty
+                DiamondIndexGeneratorHandler.normalBcommand()
+            else:
+                DiamondIndexGeneratorHandler.WithPathBcommand()
 
 
 
