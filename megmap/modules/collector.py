@@ -4,6 +4,7 @@ import os
 from megmap.modules.utils.qc import ClassQC
 from megmap.modules.utils.utility import OutputDirectoryGenerator,tarDir,gb_to_mb
 from megmap.modules.alignment.diamondAlignment import DiamondAlignment
+from megmap.modules.alignment.blastAlignment import BlastAlignment
 from megmap.modules.HitToCount import FunctionalHitToCount
 
 class megmapProcessorClass:
@@ -45,6 +46,24 @@ class megmapProcessorClass:
                 AlignmentFileNameAndPath=DiamondAlignmentHandler.WithPathDIAlcommand()
             return(AlignmentFileNameAndPath)
 
+        elif self.TakeTool == 'blast':
+            BlastAlignmentHandler=BlastAlignment(self.TakeInputFile,
+                                                    self.TakeDatabase,
+                                                    self.TakePathOfDir,
+                                                    str(self.TakePrefix+".tab"),
+                                                    self.TakeToolPath,
+                                                    self.TakeIdentity,
+                                                    self.TakeAlignmentCoverage,
+                                                    self.TakeEvalue,
+                                                    self.TakeThreads,
+                                                    self.TakeRAM)
+
+            if not self.TakeToolPath: ##check if self.TakeToolPath variable is empty
+                AlignmentFileNameAndPath=BlastAlignmentHandler.normalBAlcommand()
+            else:
+                AlignmentFileNameAndPath=BlastAlignmentHandler.WithPathBAlcommand()
+            return(AlignmentFileNameAndPath)
+
 def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                 ReceiveDatabase: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
@@ -56,9 +75,14 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
     PathOfDir=DirectoryCaller.DicGenAndCheck()
     print(PathOfDir)
     LogFilePath=""
+
     if ReceiveTool=='blast':
 
-        ClassQC(ReceiveInputFile,ReceiveReadMode,LogFilePath).__extensionType__()
+        returnQC=ClassQC(ReceiveInputFile,ReceiveReadMode,LogFilePath).__extensionType__()
+        if returnQC==False:
+            raise IOError("Sorry, something is wrong with your file format")
+
+
 
     megmapProcessorClassHandler=megmapProcessorClass(os.path.abspath(ReceiveInputFile),
                                                         PathOfDir, 
@@ -69,6 +93,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                                                         ReceiveAlignmentCoverage,
                                                         ReceiveEvalue,
                                                         ReceivePrefix,
+                                                        ReceiveReadMode,
                                                         ReceiveThreads,
                                                         ReceiveRAM)
 
