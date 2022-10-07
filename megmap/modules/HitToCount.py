@@ -5,9 +5,12 @@ from multiprocessing import  Pool
 
 class FunctionalHitToCount:
 
-    def __init__(self,TakeAlignmetnTabFile: str="",TakeThread: int="")->None:
+    def __init__(self,TakeAlignmetnTabFile: str="", TakeAligner: str="", TakeIdentity: str="", TakeAlignmentCoverage: str="", TakeThread: int="")->None:
 
         self.TakeAlignmetnTabFile=TakeAlignmetnTabFile
+        self.TakeAligner=TakeAligner
+        self.TakeIdentity=TakeIdentity
+        self.TakeAlignmentCoverage=TakeAlignmentCoverage
         self.TakeThread=TakeThread
 
 
@@ -20,8 +23,9 @@ class FunctionalHitToCount:
             counter=0
             keys=["qseqid","sseqid","pident",
                   "length","mismatch","gapopen",
-                  "qstart","qend","sstart","send",
-                  "evalue","bitscore","qcovhsp"]
+                  "qstart","qend","qlen","sstart",
+                  "send","slen","evalue","bitscore",
+                  "qcovhsp"]
             Mydict = dict([(key, []) for key in keys])
             for line in iter(map_file.readline, b""):
                 line=line.decode("utf-8")
@@ -35,16 +39,22 @@ class FunctionalHitToCount:
                 Mydict['gapopen'].append(line[5])
                 Mydict['qstart'].append(line[6])
                 Mydict['qend'].append(line[7])
-                Mydict['sstart'].append(line[8])
-                Mydict['send'].append(line[9])
-                Mydict['evalue'].append(line[10])
-                Mydict['bitscore'].append(line[11])
-                Mydict['qcovhsp'].append(line[12])
+                Mydict['qlen'].append(line[8])
+                Mydict['sstart'].append(line[9])
+                Mydict['send'].append(line[10])
+                Mydict['slen'].append(line[11])
+                Mydict['evalue'].append(line[12])
+                Mydict['bitscore'].append(line[13])
+                Mydict['qcovhsp'].append(line[14])
         
                 if counter==1000:
                     counter=0
                     MyFrame=pd.DataFrame.from_dict(Mydict)
                     MyFrame = MyFrame[keys]
+                    
+                    if self.TakeAligner =='blast':
+                        MyFrame=self.blastQueryCoverage(MyFrame)
+                    
                     self.ParallelizeDataframe(MyFrame, self.InitialProcess)
                     Mydict = dict([(key, []) for key in keys])
 
@@ -52,6 +62,10 @@ class FunctionalHitToCount:
 
         MyFrame=pd.DataFrame.from_dict(Mydict)
         MyFrame = MyFrame[keys]
+
+        if self.TakeAligner =='blast':
+            MyFrame=self.blastQueryCoverage(MyFrame)
+
         map_file.close()
 
     def ParallelizeDataframe(self,TakeDataframe,Process):
@@ -72,4 +86,8 @@ class FunctionalHitToCount:
         final = pd.merge(firstMerge,filt1,on=['qseqid','evalue'])
         return(final)
 
+    def blastQueryCoverage(self,dataFrame):
+        dataFrame['PercentCoverageQuery'] = ((dataFrame['qend'].astype(int)-dataFrame['qstart'].astype(int)+1)/dataFrame['qlen'].astype(int))*100
+        dataFrame=dataFrame[(dataFrame['PercentCoverageQuery']>=float(self.TakeAlignmentCoverage)) & (dataFrame['pident'].astype(float)>=float(self.TakeIdentity))]
+        return(dataFrame)
 

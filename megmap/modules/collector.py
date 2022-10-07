@@ -99,4 +99,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
 
     ReceiveAlignmentFileNameAndPath=megmapProcessorClassHandler.Alignment()
     FunctionalHitToCount(TakeAlignmetnTabFile=ReceiveAlignmentFileNameAndPath,
+                         TakeAligner=ReceiveTool,
+                         TakeIdentity=ReceiveAlignmentIdentity,
+                         TakeAlignmentCoverage=ReceiveAlignmentCoverage,
                          TakeThread=ReceiveThreads).ReadFileInMemory()
