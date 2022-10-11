@@ -9,7 +9,7 @@ from megmap.modules.HitToCount import FunctionalHitToCount
 
 class megmapProcessorClass:
 
-    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "", TakeDatabase: str = "", TakeTool: str ="", TakeToolPath: str ="", TakeIdentity: int="", TakeAlignmentCoverage: int="", TakeEvalue: str="", TakePrefix: str="", TakeReadMode: str="",  TakeThreads: int="", TakeRAM: str = "")->None:
+    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "", TakeDatabase: str = "", TakeTool: str ="", TakeToolPath: str ="", TakeIdentity: int="", TakeAlignmentCoverage: int="", TakeEvalue: str="", TakePrefix: str="", TakeReadMode: str="",  TakeThreads: int="", TakeRAM: str = "", TakeTopPercentage: int="")->None:
 
         self.TakeInputFile = TakeInputFile
         self.TakePathOfDir = TakePathOfDir
@@ -23,6 +23,7 @@ class megmapProcessorClass:
         self.TakeReadMode= TakeReadMode
         self.TakeThreads= TakeThreads
         self.TakeRAM= TakeRAM
+        self.TakeTopPercentage= TakeTopPercentage
 
 
 
@@ -67,9 +68,9 @@ class megmapProcessorClass:
 def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                 ReceiveDatabase: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
-                ReceiveAlignmentCoverage: int=70,ReceiveEvalue: str="",
-                ReceivePrefix: str="",ReceiveReadMode: str="", 
-                ReceiveThreads: int="",ReceiveRAM: str = "") -> None:
+                ReceiveAlignmentCoverage: int=70, ReceiveEvalue: str="",
+                ReceivePrefix: str="", ReceiveReadMode: str="", 
+                ReceiveThreads: int="", ReceiveRAM: str = "", ReceiveTopPercentage: int = 10) -> None:
 
     DirectoryCaller=OutputDirectoryGenerator(os.path.abspath(ReceiveOutput),'megmap')
     PathOfDir=DirectoryCaller.DicGenAndCheck()
@@ -95,11 +96,14 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                                                         ReceivePrefix,
                                                         ReceiveReadMode,
                                                         ReceiveThreads,
-                                                        ReceiveRAM)
+                                                        ReceiveRAM,
+                                                        ReceiveTopPercentage)
 
     ReceiveAlignmentFileNameAndPath=megmapProcessorClassHandler.Alignment()
     FunctionalHitToCount(TakeAlignmetnTabFile=ReceiveAlignmentFileNameAndPath,
+                         TakeOutFileName=str(os.path.join(os.path.abspath(PathOfDir),ReceivePrefix))+"Count.txt",
                          TakeAligner=ReceiveTool,
                          TakeIdentity=ReceiveAlignmentIdentity,
                          TakeAlignmentCoverage=ReceiveAlignmentCoverage,
-                         TakeThread=ReceiveThreads).ReadFileInMemory()
+                         TakeThread=ReceiveThreads,
+                         TakeTopPercentage=ReceiveTopPercentage).ReadFileInMemory()

@@ -57,6 +57,8 @@ def main():
                        help='Enter number of threads', metavar='threads')
     GeneralParameter.add_option('--ram',action="store",dest='ram', default="4gb",
                        help='Enter ram in gb you want to use [Default: 2gb]',metavar='ram')
+    GeneralParameter.add_option('--top',action="store",dest='ram', default="10",
+                       help='Enter top pecentage of alignment to look at [Default: 10]',metavar='topPecentage')
     # parser.add_option(GeneralParameter)
 
     parser.add_option_group(GeneralParameter)
