@@ -52,6 +52,7 @@ class FunctionalHitToCount:
                         counter=0
                         MyFrame=pd.DataFrame.from_dict(Mydict)
                         MyFrame = MyFrame[keys]
+                        MyFrame['bitscore'] = MyFrame['bitscore'].astype(float)
                         MyFrame = MyFrame[:-1]###remove last row of dataframe 
                     
                         if self.TakeAligner =='blast':
@@ -65,10 +66,10 @@ class FunctionalHitToCount:
 
         MyFrame=pd.DataFrame.from_dict(Mydict)
         MyFrame = MyFrame[keys]
-
+        MyFrame['bitscore'] = MyFrame['bitscore'].astype(float)
         if self.TakeAligner =='blast':
             MyFrame=self.blastQueryCoverage(MyFrame)
-            
+
         self.ParallelizeDataframe(MyFrame, self.InitialProcess)
 
 
@@ -96,12 +97,12 @@ class FunctionalHitToCount:
     
     def InitialProcess(self,dfsplit):
 
-        n=self.TakeTopPercentage/100
+        n=(100-int(self.TakeTopPercentage))/100
         filt = (dfsplit.sort_values(by='bitscore',ascending=False)
-                      .groupby('qseqid',group_keys=False)
-                      .apply(lambda x: x.head(int(round((len(x) * n)))))
-                      .reset_index(drop=True)
-                    )
+                .groupby('qseqid',group_keys=False)
+                .apply(lambda x:x[x['bitscore'].astype(float)>=float(x['bitscore'].astype(float).max())*float(n)])
+                .reset_index(drop=True))
+
         # firstMerge = pd.merge(dfsplit,filt,on=['qseqid','bitscore'])
         # filt1 = dfsplit.groupby(['qseqid'])['evalue'].min().to_frame().reset_index()
         # final = pd.merge(firstMerge,filt1,on=['qseqid','evalue'])
