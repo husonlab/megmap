@@ -21,6 +21,10 @@ def main():
                       help="output folder path [Default: megmap]", metavar="output" )
     parser.add_option('--d', action="store",dest="database",
                        help="provide database",metavar="database")
+    parser.add_option('--mapping', action="store",dest="mapping",
+                       help="provide mapping files directory containing .tre, .map and AccessionToMap",metavar="mapping")
+    parser.add_option('--mappingPrefix', action="store",dest="mappingPrefix",
+                       help="provide mapping prefix card, megares, biosurfdb, bacmet etc",metavar="mappingPrefix")
    #################Aligner support and parameter#################
    #################Aligner support and parameter#################
    #################Aligner support and parameter#################
@@ -66,18 +70,21 @@ def main():
 
 
     if not options.inputFile:
-        raise IOError("OSError: Must specify --in fastq or fasta or  -h/--help to print options  (use - for stdin)")
+        raise IOError("OSError: Must specify --in fastq or fasta or  -h/--help to print options  (use - for stdin).")
     elif not options.output:
-        raise IOError("OSError: Must specify --out file name or  -h/--help to print options  (use - for stdin)")
+        raise IOError("OSError: Must specify --out file name or  -h/--help to print options  (use - for stdin).")
     elif not options.database:
-        raise IOError("OSError: Must specify --d database file name or  -h/--help to print options  (use - for stdin)")
+        raise IOError("OSError: Must specify --d database file name or  -h/--help to print options  (use - for stdin).")
+    elif not options.mapping:
+        raise IOError("OSError: Must specify --mapping mapping files directory containing .tre, .map and AccessionToMap (use - for stdin).")
+    elif not options.mappingPrefix:
+        raise IOError("OSError: Must specify --mappingPrefix mapping prefix card, megares, biosurfdb, bacmet etc (use - for stdin).")
     elif not options.tool:
-        raise IOError("OSError: Must specify --al tool name or  -h/--help to print options  (use - for stdin)")
-
-
+        raise IOError("OSError: Must specify --al tool name or  -h/--help to print options  (use - for stdin).")
 
     megmapEntry(ReceiveInputFile=options.inputFile, ReceiveOutput=options.output,
-                ReceiveDatabase=options.database, ReceiveTool=options.tool,
+                ReceiveDatabase=options.database, ReceiveMapping=options.mapping,
+                ReceiveMappingPrefix=options.mappingPrefix, ReceiveTool=options.tool,
                 ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity,
                 ReceiveAlignmentCoverage=options.alignmentcoverage, ReceiveEvalue=options.evalue,
                 ReceivePrefix=options.prefix, ReceiveReadMode=options.readMode,

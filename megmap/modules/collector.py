@@ -66,11 +66,13 @@ class megmapProcessorClass:
             return(AlignmentFileNameAndPath)
 
 def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
-                ReceiveDatabase: str = "", ReceiveTool: str ="",
+                ReceiveDatabase: str = "", ReceiveMapping: str = "",
+                ReceiveMappingPrefix: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
                 ReceiveAlignmentCoverage: int=70, ReceiveEvalue: str="",
-                ReceivePrefix: str="", ReceiveReadMode: str="", 
-                ReceiveThreads: int="", ReceiveRAM: str = "", ReceiveTopPercentage: int = 10) -> None:
+                ReceivePrefix: str="", ReceiveReadMode: str="",
+                ReceiveThreads: int="", ReceiveRAM: str = "",
+                ReceiveTopPercentage: int = 10) -> None:
 
     DirectoryCaller=OutputDirectoryGenerator(os.path.abspath(ReceiveOutput),'megmap')
     PathOfDir=DirectoryCaller.DicGenAndCheck()
