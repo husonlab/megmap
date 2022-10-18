@@ -118,10 +118,10 @@ class FunctionalHitToCount:
         # final = pd.merge(firstMerge,filt1,on=['qseqid','evalue'])
         # return(final)
 
-    ##### Function to calculate user based query #####
-    ##### coverage for blast as this option is   #####
-    ##### present in blast and add new column to #####
-    ##### i.e.  PercentCoverageQuery.            #####
+    ##### Function to calculate user based query  #####
+    ##### coverage from blast tab, as this option #####
+    ##### is not present in blast. And add new    #####
+    ##### column i.e.  PercentCoverageQuery.      #####
     def blastQueryCoverage(self,dataFrame):
         dataFrame['PercentCoverageQuery'] = ((dataFrame['qend'].astype(int)-dataFrame['qstart'].astype(int)+1)/dataFrame['qlen'].astype(int))*100
         dataFrame=dataFrame[(dataFrame['PercentCoverageQuery']>=float(self.TakeAlignmentCoverage)) & (dataFrame['pident'].astype(float)>=float(self.TakeIdentity))]
