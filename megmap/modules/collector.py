@@ -5,7 +5,7 @@ from megmap.modules.utils.qc import ClassQC
 from megmap.modules.utils.utility import OutputDirectoryGenerator,tarDir,gb_to_mb
 from megmap.modules.alignment.diamondAlignment import DiamondAlignment
 from megmap.modules.alignment.blastAlignment import BlastAlignment
-from megmap.modules.HitToCount import FunctionalHitToCount
+from megmap.modules.algorithms.HitToCount import FunctionalHitToCount
 
 class megmapProcessorClass:
 
