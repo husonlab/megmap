@@ -66,7 +66,7 @@ class megmapProcessorClass:
             return(AlignmentFileNameAndPath)
 
 def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
-                ReceiveDatabase: str = "", ReceiveMapping: str = "",
+                ReceiveDatabase: str = "", ReceiveMappingDir: str = "",
                 ReceiveMappingPrefix: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
                 ReceiveAlignmentCoverage: int=70, ReceiveEvalue: str="",
@@ -78,13 +78,19 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
     PathOfDir=DirectoryCaller.DicGenAndCheck()
     print(PathOfDir)
     LogFilePath=""
-
+    QCHanlder=ClassQC(ReceiveInputFile,ReceiveReadMode,os.path.abspath(ReceiveMappingDir),
+                      ReceiveMappingPrefix,LogFilePath)
+    checkMappingFiles=QCHanlder.__checkMappingFiles__()
     if ReceiveTool=='blast':
 
-        returnQC=ClassQC(ReceiveInputFile,ReceiveReadMode,LogFilePath).__extensionType__()
+        returnQC=QCHanlder.__extensionType__()
+        
         if returnQC==False:
             raise IOError("Sorry, something is wrong with your file format")
 
+    elif ReceiveTool=='diamond':
+        if checkMappingFiles==False:
+            raise IOError("Sorry, something is wrong with your file format")
 
 
     megmapProcessorClassHandler=megmapProcessorClass(os.path.abspath(ReceiveInputFile),
@@ -107,5 +113,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                          TakeAligner=ReceiveTool,
                          TakeIdentity=ReceiveAlignmentIdentity,
                          TakeAlignmentCoverage=ReceiveAlignmentCoverage,
+                         TakeMappingDir=os.path.abspath(ReceiveMappingDir),
+                         TakeMappingPrefix=ReceiveMappingPrefix,
                          TakeThread=ReceiveThreads,
                          TakeTopPercentage=ReceiveTopPercentage).ReadFileInMemory()

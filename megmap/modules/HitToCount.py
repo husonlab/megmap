@@ -5,7 +5,9 @@ from multiprocessing import  Pool
 
 class FunctionalHitToCount:
 
-    def __init__(self,TakeAlignmetnTabFile: str="", TakeOutFileName: str="", TakeAligner: str="", TakeIdentity: str="", TakeAlignmentCoverage: str="", TakeThread: int="", TakeTopPercentage: int="")->None:
+    def __init__(self,TakeAlignmetnTabFile: str="", TakeOutFileName: str="", TakeAligner: str="",
+                 TakeIdentity: str="", TakeAlignmentCoverage: str="",TakeMappingDir: str="",
+                 TakeMappingPrefix: str="", TakeThread: int="", TakeTopPercentage: int="")->None:
 
         self.TakeAlignmetnTabFile=TakeAlignmetnTabFile
         self.TakeOutFileName=TakeOutFileName
@@ -13,11 +15,12 @@ class FunctionalHitToCount:
         self.TakeAligner=TakeAligner
         self.TakeIdentity=TakeIdentity
         self.TakeAlignmentCoverage=TakeAlignmentCoverage
+        self.TakeMappingDir=TakeMappingDir
+        self.TakeMappingPrefix=TakeMappingPrefix
         self.TakeThread=TakeThread
         self.TakeTopPercentage=TakeTopPercentage
 
-
-
+    ##### Function to read file in memory #####
     def ReadFileInMemory(self):
         
         with open(self.TakeAlignmetnTabFile, "r+b") as f:
@@ -94,9 +97,10 @@ class FunctionalHitToCount:
         # pool.join()
         # print(dataframe)
 
-    
+    ##### Function to get top n percent of bitscore #####   
     def InitialProcess(self,dfsplit):
 
+        ##
         n=(100-int(self.TakeTopPercentage))/100
         filt = (dfsplit.sort_values(by='bitscore',ascending=False)
                 .groupby('qseqid',group_keys=False)
@@ -114,6 +118,10 @@ class FunctionalHitToCount:
         # final = pd.merge(firstMerge,filt1,on=['qseqid','evalue'])
         # return(final)
 
+    ##### Function to calculate user based query #####
+    ##### coverage for blast as this option is   #####
+    ##### present in blast and add new column to #####
+    ##### i.e.  PercentCoverageQuery.            #####
     def blastQueryCoverage(self,dataFrame):
         dataFrame['PercentCoverageQuery'] = ((dataFrame['qend'].astype(int)-dataFrame['qstart'].astype(int)+1)/dataFrame['qlen'].astype(int))*100
         dataFrame=dataFrame[(dataFrame['PercentCoverageQuery']>=float(self.TakeAlignmentCoverage)) & (dataFrame['pident'].astype(float)>=float(self.TakeIdentity))]

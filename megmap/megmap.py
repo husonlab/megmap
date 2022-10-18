@@ -83,7 +83,7 @@ def main():
         raise IOError("OSError: Must specify --al tool name or  -h/--help to print options  (use - for stdin).")
 
     megmapEntry(ReceiveInputFile=options.inputFile, ReceiveOutput=options.output,
-                ReceiveDatabase=options.database, ReceiveMapping=options.mapping,
+                ReceiveDatabase=options.database, ReceiveMappingDir=options.mapping,
                 ReceiveMappingPrefix=options.mappingPrefix, ReceiveTool=options.tool,
                 ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity,
                 ReceiveAlignmentCoverage=options.alignmentcoverage, ReceiveEvalue=options.evalue,
