@@ -6,6 +6,7 @@ from megmap.modules.utils.utility import OutputDirectoryGenerator,tarDir,gb_to_m
 from megmap.modules.alignment.diamondAlignment import DiamondAlignment
 from megmap.modules.alignment.blastAlignment import BlastAlignment
 from megmap.modules.algorithms.HitToCount import FunctionalHitToCount
+from megmap.modules.algorithms.mapping import MappingHitToAnnotation
 
 class megmapProcessorClass:
 
@@ -108,7 +109,8 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                                                         ReceiveTopPercentage)
 
     ReceiveAlignmentFileNameAndPath=megmapProcessorClassHandler.Alignment()
-    FunctionalHitToCount(TakeAlignmetnTabFile=ReceiveAlignmentFileNameAndPath,
+
+    TempFilePath=FunctionalHitToCount(TakeAlignmentTabFile=ReceiveAlignmentFileNameAndPath,
                          TakeOutFileName=str(os.path.join(os.path.abspath(PathOfDir),ReceivePrefix))+"Count.txt",
                          TakeAligner=ReceiveTool,
                          TakeIdentity=ReceiveAlignmentIdentity,
@@ -117,3 +119,10 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                          TakeMappingPrefix=ReceiveMappingPrefix,
                          TakeThread=ReceiveThreads,
                          TakeTopPercentage=ReceiveTopPercentage).ReadFileInMemory()
+
+    MappingHitToAnnotation(TakeInputTempFile=TempFilePath,
+                           TakeOutFileName=str(os.path.join(os.path.abspath(PathOfDir),ReceivePrefix))+"Count.txt",
+                           TakeTreeFile=os.path.abspath(os.path.join(ReceiveMappingDir,str(str(ReceiveMappingPrefix)+".tre"))),
+                           TakeMapFile=os.path.abspath(os.path.join(ReceiveMappingDir,str(str(ReceiveMappingPrefix)+".map"))),
+                           TakeAccMapFile=os.path.abspath(os.path.join(ReceiveMappingDir,str(str("acc2")+str(ReceiveMappingPrefix)+".map"))),
+                           TakeThread=ReceiveThreads).__ReadMergeDistribute__()

@@ -5,11 +5,11 @@ from multiprocessing import  Pool
 
 class FunctionalHitToCount:
 
-    def __init__(self,TakeAlignmetnTabFile: str="", TakeOutFileName: str="", TakeAligner: str="",
+    def __init__(self,TakeAlignmentTabFile: str="", TakeOutFileName: str="", TakeAligner: str="",
                  TakeIdentity: str="", TakeAlignmentCoverage: str="",TakeMappingDir: str="",
                  TakeMappingPrefix: str="", TakeThread: int="", TakeTopPercentage: int="")->None:
 
-        self.TakeAlignmetnTabFile=TakeAlignmetnTabFile
+        self.TakeAlignmentTabFile=TakeAlignmentTabFile
         self.TakeOutFileName=TakeOutFileName
         self.TakeOutFileNameTemp=str(TakeOutFileName)+".temp"
         self.TakeAligner=TakeAligner
@@ -21,9 +21,9 @@ class FunctionalHitToCount:
         self.TakeTopPercentage=TakeTopPercentage
 
     ##### Function to read file in memory #####
-    def ReadFileInMemory(self):
+    def ReadFileInMemory(self)->str:
         
-        with open(self.TakeAlignmetnTabFile, "r+b") as f:
+        with open(self.TakeAlignmentTabFile, "r+b") as f:
 
             map_file = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
             counter=0
@@ -77,7 +77,7 @@ class FunctionalHitToCount:
 
 
         map_file.close()
-
+        return(self.TakeOutFileNameTemp)
 
     def ParallelizeDataframe(self,TakeDataframe,Process):
 
