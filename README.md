@@ -10,7 +10,7 @@ Before opening a new issue here, please check the appropriate already exits issu
   [![pypi version](https://img.shields.io/pypi/v/megmap.svg)](https://pypi.python.org/pypi/megmap)  [![pytesting](https://github.com/AnupamGautam/megmap/actions/workflows/megmaptesting.yml/badge.svg)](https://github.com/AnupamGautam/megmap/actions/runs/875092459) [![Build Status](https://travis-ci.org/joemccann/megmap.svg?branch=master)](https://travis-ci.org/joemccann/megmap)
 ## megmap User Manual
 
-megmap help you perform metegenomic analysis against speceial purpose database
+megmap help you perform metegenomic analysis against special purpose database
 
 **If you use megmap in your work, please cite the megmap paper:**
 
@@ -37,6 +37,17 @@ Please install the required software in a location in your `$PATH`
 ## Installation
 
 ----
+## via Conda ##
+```sh
+1. Create environment and install.
+      conda create --name megmap -c anupam__gautam megmap -c conda-forge -c anaconda -c etetoolkit -c bioconda -c defaults megmap
+
+2. Activate environment and use.
+      conda activate megmap
+
+```
+
+----
 ## Automated Installation ## 
 ```sh
 1. Clone megmap git.
@@ -45,7 +56,7 @@ Please install the required software in a location in your `$PATH`
 2. Move to the megmap directory.
       cd megmap`
 
-3. Create conda enviroment with require dependency. 
+3. Create conda environment with require dependency. 
       conda env create -n megmap --file megmap_2022.09_py10_conda.yaml
       conda activate megmap
 ```
