@@ -10,7 +10,13 @@ from megmap.modules.algorithms.mapping import MappingHitToAnnotation
 
 class megmapProcessorClass:
 
-    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "", TakeDatabase: str = "", TakeTool: str ="", TakeToolPath: str ="", TakeIdentity: int="", TakeAlignmentCoverage: int="", TakeEvalue: str="", TakePrefix: str="", TakeReadMode: str="",  TakeThreads: int="", TakeRAM: str = "", TakeTopPercentage: int="")->None:
+    def __init__(self,TakeInputFile: str="", TakePathOfDir: str = "",
+                 TakeDatabase: str = "", TakeTool: str ="",
+                 TakeToolPath: str ="", TakeIdentity: int="",
+                 TakeAlignmentCoverage: int="", TakeEvalue: str="",
+                 TakePrefix: str="", TakeReadMode: str="",
+                 TakeThreads: int="",TakeRAM: str = "",
+                 TakeTopPercentage: int="")->None:
 
         self.TakeInputFile = TakeInputFile
         self.TakePathOfDir = TakePathOfDir
@@ -39,8 +45,10 @@ class megmapProcessorClass:
                                                     self.TakeIdentity,
                                                     self.TakeAlignmentCoverage,
                                                     self.TakeEvalue,
+                                                    self.TakeReadMode,
                                                     self.TakeThreads,
-                                                    self.TakeRAM)
+                                                    self.TakeRAM,
+                                                    self.TakeTopPercentage)
 
             if not self.TakeToolPath: ##check if self.TakeToolPath variable is empty
                 AlignmentFileNameAndPath=DiamondAlignmentHandler.normalDIAlcommand()
@@ -57,6 +65,7 @@ class megmapProcessorClass:
                                                     self.TakeIdentity,
                                                     self.TakeAlignmentCoverage,
                                                     self.TakeEvalue,
+                                                    self.TakeReadMode,
                                                     self.TakeThreads,
                                                     self.TakeRAM)
 
