@@ -46,7 +46,7 @@ class MappingHitToAnnotation:
                     counter=counter+1
                     Mydict = self.dictionaryAppender(keys,Mydict,line)
                     
-                    if counter>=2999:
+                    if counter>=100000:
                         if Mydict['qseqid'][-1]==Mydict['qseqid'][-2]:
 
                             continue
@@ -138,7 +138,7 @@ class MappingHitToAnnotation:
                         value = value.up
                     path.append(self.root)
                     name.append(self.MapFiledictionary[self.root])
-                    dfToStore = pd.concat([dfToStore, pd.DataFrame([{'qseqid': row['qseqid'], 'path':str(", ".join(name[::-1]))}])])
+                    dfToStore = pd.concat([dfToStore, pd.DataFrame([{'qseqid': row['qseqid'], 'path':str("; ".join(name[::-1]))}])])
 
         return(dfToStore)
 

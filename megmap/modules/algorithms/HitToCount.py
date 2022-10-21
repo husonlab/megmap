@@ -47,7 +47,7 @@ class FunctionalHitToCount:
                 counter=counter+1
 
                 Mydict = self.dictionaryAppender(Mydict,line)
-                if counter>=2000:
+                if counter>=100000:
                     if Mydict['qseqid'][-1]==Mydict['qseqid'][-2]:
 
                         continue
