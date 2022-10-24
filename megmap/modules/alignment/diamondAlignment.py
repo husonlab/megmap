@@ -6,6 +6,7 @@ class DiamondAlignment:
                  OutputDirName: str ="", OutputFileName: str ="",
                  ToolPath: str ="", Identity: int="",
                  Coverage: int="", Evalue: str ="",
+                 frameshift: int="",
                  ReadMode: str ="", Threads: int="",
                  RAM: str = "", TopPercentage: int="")->None:
 
@@ -17,11 +18,13 @@ class DiamondAlignment:
         self.Identity=Identity
         self.Coverage=Coverage
         self.Evalue=Evalue
+        self.frameshift=frameshift
         self.ReadMode=ReadMode
         self.Threads=Threads
         self.RAM=RAM
         self.TopPercentage=TopPercentage
 
+        print(self.frameshift)
     def normalDIAlcommand(self)->str:
 
         if self.ReadMode=='short':

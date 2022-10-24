@@ -43,6 +43,8 @@ def main():
                        help='Enter alignment coverage for the longer sequence, if set to 70 the alignment must covers 70%% of the sequence [Default: 70]',metavar='alignmentcoverage')
     aligner.add_option('--evalue', dest="evalue", action="store", default='1e-05',
                        help='Enter max E-value for hit to be consider. [Default: 1e-05, max=0.01]',metavar='evalue')
+    aligner.add_option('--frameshift', dest="frameshift", action="store", default='',
+                       help='frame shift penalty [default=disabled]',metavar='frameshift')
     parser.add_option_group(aligner)
 
    #################General support and parameter#################
@@ -87,6 +89,7 @@ def main():
                 ReceiveMappingPrefix=options.mappingPrefix, ReceiveTool=options.tool,
                 ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity,
                 ReceiveAlignmentCoverage=options.alignmentcoverage, ReceiveEvalue=options.evalue,
+                Receiveframeshift=options.frameshift,
                 ReceivePrefix=options.prefix, ReceiveReadMode=options.readMode,
                 ReceiveThreads=options.threads, ReceiveRAM=options.ram)
 

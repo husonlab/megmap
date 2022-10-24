@@ -14,6 +14,7 @@ class megmapProcessorClass:
                  TakeDatabase: str = "", TakeTool: str ="",
                  TakeToolPath: str ="", TakeIdentity: int="",
                  TakeAlignmentCoverage: int="", TakeEvalue: str="",
+                 Takeframeshift: int="",
                  TakePrefix: str="", TakeReadMode: str="",
                  TakeThreads: int="",TakeRAM: str = "",
                  TakeTopPercentage: int="")->None:
@@ -26,6 +27,7 @@ class megmapProcessorClass:
         self.TakeIdentity = TakeIdentity
         self.TakeAlignmentCoverage = TakeAlignmentCoverage
         self.TakeEvalue = TakeEvalue
+        self.Takeframeshift = Takeframeshift
         self.TakePrefix= TakePrefix
         self.TakeReadMode= TakeReadMode
         self.TakeThreads= TakeThreads
@@ -45,6 +47,7 @@ class megmapProcessorClass:
                                                     self.TakeIdentity,
                                                     self.TakeAlignmentCoverage,
                                                     self.TakeEvalue,
+                                                    self.Takeframeshift,
                                                     self.TakeReadMode,
                                                     self.TakeThreads,
                                                     self.TakeRAM,
@@ -80,6 +83,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                 ReceiveMappingPrefix: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
                 ReceiveAlignmentCoverage: int=70, ReceiveEvalue: str="",
+                Receiveframeshift: int='',
                 ReceivePrefix: str="", ReceiveReadMode: str="",
                 ReceiveThreads: int="", ReceiveRAM: str = "",
                 ReceiveTopPercentage: int = 10) -> None:
@@ -111,6 +115,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                                                         ReceiveAlignmentIdentity,
                                                         ReceiveAlignmentCoverage,
                                                         ReceiveEvalue,
+                                                        Receiveframeshift,
                                                         ReceivePrefix,
                                                         ReceiveReadMode,
                                                         ReceiveThreads,
