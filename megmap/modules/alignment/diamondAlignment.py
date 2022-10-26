@@ -24,7 +24,7 @@ class DiamondAlignment:
         self.RAM=RAM
         self.TopPercentage=TopPercentage
 
-        print(self.frameshift)
+
     def normalDIAlcommand(self)->str:
 
         if self.ReadMode=='short':
@@ -32,7 +32,7 @@ class DiamondAlignment:
             return(os.path.join(self.OutputDirName,self.OutputFileName))
 
         elif self.ReadMode=='long':
-            os.system("diamond blastx --query  "+str(self.QueryFile)+" --db  "+str(self.DatabaseIndex)+" --out "+str(os.path.join(self.OutputDirName,self.OutputFileName))+" --id  "+str(self.Identity)+" --query-cover  "+str(self.Coverage)+" --evalue "+str(self.Evalue)+" --threads  "+str(self.Threads)+"  --range-culling --top "+str(self.TopPercentage)+" -F 15  --outfmt 6 qseqid sseqid pident length mismatch gapopen qstart qend qlen sstart send slen evalue bitscore qcovhsp  ")
+            os.system("diamond blastx --query  "+str(self.QueryFile)+" --db  "+str(self.DatabaseIndex)+" --out "+str(os.path.join(self.OutputDirName,self.OutputFileName))+" --id  "+str(self.Identity)+" --query-cover  "+str(self.Coverage)+" --evalue "+str(self.Evalue)+" --threads  "+str(self.Threads)+"  --range-culling --top "+str(self.TopPercentage)+" -F "+str(self.frameshift)+" --outfmt 6 qseqid sseqid pident length mismatch gapopen qstart qend qlen sstart send slen evalue bitscore qcovhsp  ")
             return(os.path.join(self.OutputDirName,self.OutputFileName))
 
         else:
@@ -45,7 +45,7 @@ class DiamondAlignment:
             return(os.path.join(self.OutputDirName,self.OutputFileName))
 
         elif self.ReadMode=='long':
-            os.system(os.path.join(os.path.abspath(self.ToolPath),"diamond")+"  blastx --query  "+str(self.QueryFile)+" --db  "+str(self.DatabaseIndex)+" --out "+str(os.path.join(self.OutputDirName,self.OutputFileName))+" --id  "+str(self.Identity)+" --query-cover  "+str(self.Coverage)+" --evalue "+str(self.Evalue)+" --threads  "+str(self.Threads)+" --range-culling --top "+str(self.TopPercentage)+" -F 15  --outfmt 6 qseqid sseqid pident length mismatch gapopen qstart qend qlen sstart send slen evalue bitscore qcovhsp ")
+            os.system(os.path.join(os.path.abspath(self.ToolPath),"diamond")+"  blastx --query  "+str(self.QueryFile)+" --db  "+str(self.DatabaseIndex)+" --out "+str(os.path.join(self.OutputDirName,self.OutputFileName))+" --id  "+str(self.Identity)+" --query-cover  "+str(self.Coverage)+" --evalue "+str(self.Evalue)+" --threads  "+str(self.Threads)+" --range-culling --top "+str(self.TopPercentage)+" -F "+str(self.frameshift)+"  --outfmt 6 qseqid sseqid pident length mismatch gapopen qstart qend qlen sstart send slen evalue bitscore qcovhsp ")
             return(os.path.join(self.OutputDirName,self.OutputFileName))
 
         else:

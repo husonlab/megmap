@@ -83,7 +83,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
                 ReceiveMappingPrefix: str = "", ReceiveTool: str ="",
                 ReceiveToolPath: str="", ReceiveAlignmentIdentity: int=70,
                 ReceiveAlignmentCoverage: int=70, ReceiveEvalue: str="",
-                Receiveframeshift: int='',
+                Receiveframeshift: int= 15,
                 ReceivePrefix: str="", ReceiveReadMode: str="",
                 ReceiveThreads: int="", ReceiveRAM: str = "",
                 ReceiveTopPercentage: int = 10) -> None:
