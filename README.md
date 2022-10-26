@@ -7,7 +7,8 @@
 Before opening a new issue here, please check the appropriate already exits issues and commenting on a thread there.
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-  [![pypi version](https://img.shields.io/pypi/v/megmap.svg)](https://pypi.python.org/pypi/megmap)  [![pytesting](https://github.com/AnupamGautam/megmap/actions/workflows/megmaptesting.yml/badge.svg)](https://github.com/AnupamGautam/megmap/actions/runs/875092459) [![Build Status](https://travis-ci.org/joemccann/megmap.svg?branch=master)](https://travis-ci.org/joemccann/megmap)
+ 
+ 
 ## megmap User Manual
 
 megmap help you perform metegenomic analysis against special purpose database
