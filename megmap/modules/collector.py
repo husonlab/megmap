@@ -92,6 +92,8 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
     PathOfDir=DirectoryCaller.DicGenAndCheck()
     print(PathOfDir)
     LogFilePath=""
+
+    #### Run QC on file to check 
     QCHanlder=ClassQC(ReceiveInputFile,ReceiveReadMode,os.path.abspath(ReceiveMappingDir),
                       ReceiveMappingPrefix,LogFilePath)
     checkMappingFiles=QCHanlder.__checkMappingFiles__()
@@ -99,7 +101,7 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
 
         returnQC=QCHanlder.__extensionType__()
         
-        if returnQC==False:
+        if (returnQC==False) and (checkMappingFiles==False):
             raise IOError("Sorry, something is wrong with your file format")
 
     elif ReceiveTool=='diamond':
