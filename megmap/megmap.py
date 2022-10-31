@@ -25,6 +25,8 @@ def main():
                        help="provide mapping files directory containing .tre, .map and AccessionToMap",metavar="mapping")
     parser.add_option('--mappingPrefix', action="store",dest="mappingPrefix",
                        help="provide mapping prefix card, megares, biosurfdb, bacmet etc",metavar="mappingPrefix")
+    parser.add_option('--mdb', action="store",dest="mdb",
+                       help="provide mdb file",metavar="mdb")
    #################Aligner support and parameter#################
    #################Aligner support and parameter#################
    #################Aligner support and parameter#################
@@ -86,10 +88,10 @@ def main():
 
     megmapEntry(ReceiveInputFile=options.inputFile, ReceiveOutput=options.output,
                 ReceiveDatabase=options.database, ReceiveMappingDir=options.mapping,
-                ReceiveMappingPrefix=options.mappingPrefix, ReceiveTool=options.tool,
-                ReceiveToolPath=options.toolpath, ReceiveAlignmentIdentity=options.alignmentidentity,
-                ReceiveAlignmentCoverage=options.alignmentcoverage, ReceiveEvalue=options.evalue,
-                Receiveframeshift=options.frameshift,
+                ReceiveMappingPrefix=options.mappingPrefix, ReceiveMappingdb=options.mdb,
+                ReceiveTool=options.tool, ReceiveToolPath=options.toolpath,
+                ReceiveAlignmentIdentity=options.alignmentidentity, ReceiveAlignmentCoverage=options.alignmentcoverage,
+                ReceiveEvalue=options.evalue, Receiveframeshift=options.frameshift,
                 ReceivePrefix=options.prefix, ReceiveReadMode=options.readMode,
                 ReceiveThreads=options.threads, ReceiveRAM=options.ram)
 
