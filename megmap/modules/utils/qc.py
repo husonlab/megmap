@@ -1,14 +1,17 @@
 import filetype
 import os
+import traceback
+
 class ClassQC:
 
     def __init__(self,TakeFile: str="" ,TakeReadMode: str="", TakeMappingDir: str="",
-                 TakeMappingPrefix: str="", TakeLogFile: str="")->None:
+                 TakeMappingPrefix: str="", TakeMappingdb: str="", TakeLogFile: str="")->None:
 
         self.TakeFile=TakeFile
         self.TakeReadMode=TakeReadMode
         self.TakeMappingDir=TakeMappingDir
         self.TakeMappingPrefix=TakeMappingPrefix
+        self.TakeMappingdb=TakeMappingdb
         self.TakeLogFile=TakeLogFile
 
     def __extensionType__(self)->bool:
@@ -43,17 +46,25 @@ class ClassQC:
                 counter=counter+1
             else:
                 raise IOError("Sorry, something is wrong with your "+str(treFile)+" file")
-            if(os.path.exists(acessionToClassificationMapFile) and os.path.getsize(acessionToClassificationMapFile)>0):
-                counter=counter+1
+            if self.TakeMappingdb:
+                if os.path.exists(os.path.abspath(self.TakeMappingdb)):
+                    counter=counter+1
+                else:
+                    raise IOError("Sorry, something is wrong with your "+str(self.TakeMappingdb)+" file")
             else:
-                raise IOError("Sorry, something is wrong with your "+str(acessionToClassificationMapFile)+" file")
+                if(os.path.exists(acessionToClassificationMapFile) and os.path.getsize(acessionToClassificationMapFile)>0):
+                    counter=counter+1
+                else:
+                    raise IOError("Sorry, something is wrong with your "+str(acessionToClassificationMapFile)+" file")
 
             if counter==3:
                 return (True)
             elif counter<3:
                 return (False)
 
-        except:
+        except Exception:
+
+            traceback.print_exc()
             return(False)
 
 

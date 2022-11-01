@@ -94,9 +94,10 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
     LogFilePath=""
 
     #### Run QC on file to check 
-    QCHanlder=ClassQC(ReceiveInputFile,ReceiveReadMode,os.path.abspath(ReceiveMappingDir),
-                      ReceiveMappingPrefix,LogFilePath)
+    QCHanlder=ClassQC(ReceiveInputFile, ReceiveReadMode, os.path.abspath(ReceiveMappingDir),
+                      ReceiveMappingPrefix, ReceiveMappingdb, LogFilePath)
     checkMappingFiles=QCHanlder.__checkMappingFiles__()
+
     if ReceiveTool=='blast':
 
         returnQC=QCHanlder.__extensionType__()
