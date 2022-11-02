@@ -23,7 +23,8 @@ class DiamondAlignment:
         self.Threads=Threads
         self.RAM=RAM
         self.TopPercentage=TopPercentage
-
+        print(self.Identity)
+        print(self.Coverage)
 
     def normalDIAlcommand(self)->str:
 

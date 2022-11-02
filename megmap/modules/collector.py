@@ -101,9 +101,11 @@ def megmapEntry(ReceiveInputFile: str ="", ReceiveOutput: str = "megmap",
     if ReceiveTool=='blast':
 
         returnQC=QCHanlder.__extensionType__()
-        
+        # print(returnQC)
         if (returnQC==False) and (checkMappingFiles==False):
             raise IOError("Sorry, something is wrong with your file format")
+        elif(returnQC==False) and (checkMappingFiles==True):
+            raise IOError("Sorry, something is wrong, file format is not FastA")
 
     elif ReceiveTool=='diamond':
         if checkMappingFiles==False:

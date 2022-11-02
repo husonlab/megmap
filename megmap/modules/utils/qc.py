@@ -85,6 +85,8 @@ class ClassQC:
                 FileRead.close()
                 if counter>0:
                     return (True)
+                else:
+                    return (False)
             except:
                 return (False)
 
